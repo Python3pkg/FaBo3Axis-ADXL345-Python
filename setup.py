@@ -8,7 +8,7 @@ classifiers = ['Development Status :: 4 - Beta',
                'Topic :: System :: Hardware']
 
 setup(
-    name                ='FaBo3Axis-ADXL345-Python',
+    name                ='fabo3Axis_ADXL345',
     version             ='1.0.0',
     description         ="This is a library for the FaBo 3AXIS I2C Brick.",
     author              ='FaBo',
