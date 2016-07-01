@@ -18,6 +18,5 @@ setup(
     classifiers         = classifiers,
     packages            =find_packages(),
     include_package_data=True,
-    zip_safe            =True,
-    long_description    =read_md('README.md')
+    zip_safe            =True
 )
