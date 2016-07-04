@@ -153,11 +153,15 @@ class ADXL345:
 
     ## Enable Tap
     #  @param [in] self The object pointer.
-    def enableTap(self):
-        bus.write_byte_data(self.address, THRESH_TAP_REG, 0x32) # 62.5mg/LBS
-        bus.write_byte_data(self.address, DUR_REG, 0x1f)        # 1.25ms/LSB
-        bus.write_byte_data(self.address, LATENT_REG, 0xf8)     # 1.25ms/LSB
-        bus.write_byte_data(self.address, WINDOW_REG, 0xcb)     # 1.25ms/LSB
+    #  @param [in] thresh_tap  TAPの強さの閾値       Default:0x32
+    #  @param [in] dur         TAP持続時間          Default:0x30
+    #  @param [in] latant      識別間隔             Default:0xf8
+    #  @param [in] window      識別間隔のインターバル Default:0x10
+    def enableTap(self, thresh_tap=0x32, dur=0x30, latant=0xf8, window=0x10):
+        bus.write_byte_data(self.address, THRESH_TAP_REG, thresh_tap) # 62.5mg/LBS
+        bus.write_byte_data(self.address, DUR_REG, dur)               # 1.25ms/LSB
+        bus.write_byte_data(self.address, LATENT_REG, latant)         # 1.25ms/LSB
+        bus.write_byte_data(self.address, WINDOW_REG, window)         # 1.25ms/LSB
 
         int_tap = INT_SINGLE_TAP | INT_DOUBLE_TAP
         bus.write_byte_data(self.address, INT_ENABLE_REG, int_tap)     # Interrupts Tap Enable
@@ -199,19 +203,22 @@ class ADXL345:
     def read(self):
         data = bus.read_i2c_block_data(self.address, DATA_XYZ, 6)
 
-        x = data[0] | (data[1] << 8)
-        if(x & (1 << 16 - 1)):
-            x = x - (1<<16)
-
-        y = data[2] | (data[3] << 8)
-        if(y & (1 << 16 - 1)):
-            y = y - (1<<16)
-
-        z = data[4] | (data[5] << 8)
-        if(z & (1 << 16 - 1)):
-            z = z - (1<<16)
+        x = self.dataConv(data[0], data[1])
+        y = self.dataConv(data[2], data[3])
+        z = self.dataConv(data[4], data[5])
 
         return {"x":x, "y":y, "z":z}
+
+    ## Data Convert
+    # @param [in] self The object pointer.
+    # @param [in] data1 LSB
+    # @param [in] data2 MSB
+    # @retval Value MSB+LSB(int 16bit)
+    def dataConv(self, data1, data2):
+        value = data1 | (data2 << 8)
+        if(value & (1 << 16 - 1)):
+            value -= (1<<16)
+        return value
 
 if __name__ == "__main__":
     axis = ADXL345()

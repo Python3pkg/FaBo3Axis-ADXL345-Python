@@ -10,10 +10,11 @@
 #
 #  FaBo <info@fabo.io>
 
-import faboADXL345
+import FaBo3Axis_ADXL345
 import time
 
-adxl345 =  faboADXL345.ADXL345()
+adxl345 = FaBo3Axis_ADXL345.ADXL345()
+
 adxl345.enableTap()
 
 while True:

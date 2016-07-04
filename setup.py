@@ -1,4 +1,5 @@
 from setuptools import setup, find_packages
+
 classifiers = ['Development Status :: 4 - Beta',
                'Operating System :: POSIX :: Linux',
                'License :: MIT License',
@@ -8,15 +9,13 @@ classifiers = ['Development Status :: 4 - Beta',
                'Topic :: System :: Hardware']
 
 setup(
-    name                ='faboADXL345',
-    version             ='1.0.0',
-    description         ="This is a library for the FaBo 3AXIS I2C Brick.",
-    author              ='FaBo',
-    author_email        ='info@fabo.io',
-    url                 ='https://github.com/FaBoPlatform/FaBo3Axis-ADXL345-Python/',
-    license             ='MIT',
-    classifiers         = classifiers,
-    packages            =find_packages(),
-    include_package_data=True,
-    zip_safe            =True
+    name         = 'FaBo3Axis_ADXL345',
+    version      = '1.0.0',
+    author       = 'FaBo',
+    author_email = 'info@fabo.io',
+    description  = "This is a library for the FaBo 3AXIS I2C Brick.",
+    url          = 'https://github.com/FaBoPlatform/FaBo3Axis-ADXL345-Python/',
+    license      = 'MIT',
+    classifiers  = classifiers,
+    packages     = find_packages()
 )
