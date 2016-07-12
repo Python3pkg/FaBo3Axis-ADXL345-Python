@@ -12,13 +12,18 @@
 
 import FaBo3Axis_ADXL345
 import time
+import sys
 
 adxl345 = FaBo3Axis_ADXL345.ADXL345()
 
-while True:
-    axes = adxl345.read()
-    print "x = " , (axes['x'])
-    print "y = " , (axes['y'])
-    print "z = " , (axes['z'])
-    print
-    time.sleep(0.5)
+try:
+    while True:
+        axes = adxl345.read()
+        print "x = " , (axes['x'])
+        print "y = " , (axes['y'])
+        print "z = " , (axes['z'])
+        print
+
+        time.sleep(0.5)
+except KeyboardInterrupt:
+    sys.exit()

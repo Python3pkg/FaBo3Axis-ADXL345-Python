@@ -12,16 +12,24 @@
 
 import FaBo3Axis_ADXL345
 import time
+import sys
 
 adxl345 = FaBo3Axis_ADXL345.ADXL345()
 
+# Tap enable
 adxl345.enableTap()
 
-while True:
-    tap = adxl345.readIntStatus()
-    if adxl345.isDoubleTap(tap):
-        print "Double Tap"
-    if adxl345.isSingleTap(tap):
-        print "Single Tap"
-    print "*"
-    time.sleep(0.5)
+try:
+    while True:
+        tap = adxl345.readIntStatus()
+        if adxl345.isDoubleTap(tap):
+            print "Double Tap"
+
+        if adxl345.isSingleTap(tap):
+            print "Single Tap"
+
+        print "*"
+        time.sleep(0.5)
+
+except KeyboardInterrupt:
+    sys.exit()

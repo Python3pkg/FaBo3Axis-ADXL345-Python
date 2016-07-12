@@ -1,5 +1,5 @@
 # coding: utf-8
-## @package faboADXL345
+## @package FaBo3Axis_ADXL345
 #  This is a library for the FaBo 3AXIS I2C Brick.
 #
 #  http://fabo.io/201.html
@@ -115,14 +115,13 @@ WAKEUP_8HZ     = 0b00000000
 ## SMBus
 bus = smbus.SMBus(1)
 
-## ADXL345 class
-# Some class description
+## ADXL345 I2C Controll class
 class ADXL345:
 
     ## Constructor
-    #  @param [in] self The object pointer.
-    def __init__(self):
-        self.address = SLAVE_ADDRESS
+    #  @param [in] address ADXL345 i2c slave_address default:0x53
+    def __init__(self, address=SLAVE_ADDRESS):
+        self.address = address
 
         self.configuration()
         self.powerOn()
