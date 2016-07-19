@@ -14,7 +14,7 @@ classifiers = ['Development Status :: 4 - Beta',
                'Programming Language :: Python :: 2.7',
                'Topic :: Software Development',
                'Topic :: System :: Hardware']
-"License :: OSI Approved :: Apache Software License",
+
 setup(
     name         = 'FaBo3Axis_ADXL345',
     version      = '1.0.0',
