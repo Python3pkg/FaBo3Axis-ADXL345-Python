@@ -1,6 +1,6 @@
 # coding: utf-8
-## @package FaBo3Axis_ADXL345
-#  This is a library for the FaBo 3AXIS I2C Brick.
+## @package ADXL345
+#  This is a FaBo3Axis_ADXL345 library for the FaBo 3AXIS I2C Brick.
 #
 #  http://fabo.io/201.html
 #
@@ -49,68 +49,68 @@ INT_SOURCE_REG  = 0x30
 DATA_FORMAT_REG = 0x31
 
 # Data Format Param
-## SELF Test ON
-SELF_TEST_ON   = 0b10000000
-## SELF Test OFF
-SELF_TEST_OFF  = 0b00000000
-## SELF SPI ON
-SPI_ON         = 0b01000000
-## SELF SPI OFF
-SPI_OFF        = 0b00000000
-## INT_INVERT ON
-INT_INVERT_ON  = 0b00100000
-## INT_INVERT OFF
-INT_INVERT_OFF = 0b00000000
-## FULL_RES ON
-FULL_RES_ON    = 0b00001000
-## FULL_RES OFF
-FULL_RES_OFF   = 0b00000000
-## JUSTIFY ON
-JUSTIFY_ON     = 0b00000100
-## JUSTIFY OFF
-JUSTIFY_OFF    = 0b00000000
-## RANGE 16G
-RANGE_16G      = 0b00000011
-## RANGE 8G
-RANGE_8G       = 0b00000010
-## RANGE 4G
-RANGE_4G       = 0b00000001
-## RANGE 2G
-RANGE_2G       = 0b00000000
+## SELF Test ON   : 0b10000000
+SELF_TEST_ON   = 0x80
+## SELF Test OFF  : 0b00000000
+SELF_TEST_OFF  = 0x00
+## SELF SPI ON    : 0b01000000
+SPI_ON         = 0x40
+## SELF SPI OFF   : 0b00000000
+SPI_OFF        = 0x00
+## INT_INVERT ON  : 0b00100000
+INT_INVERT_ON  = 0x20
+## INT_INVERT OFF : 0b00000000
+INT_INVERT_OFF = 0x00
+## FULL_RES ON    : 0b00001000
+FULL_RES_ON    = 0x08
+## FULL_RES OFF   : 0b00000000
+FULL_RES_OFF   = 0x00
+## JUSTIFY ON     : 0b00000100
+JUSTIFY_ON     = 0x04
+## JUSTIFY OFF    : 0b00000000
+JUSTIFY_OFF    = 0x00
+## RANGE 16G      : 0b00000011
+RANGE_16G      = 0x03
+## RANGE 8G       : 0b00000010
+RANGE_8G       = 0x02
+## RANGE 4G       : 0b00000001
+RANGE_4G       = 0x01
+## RANGE 2G       : 0b00000000
+RANGE_2G       = 0x00
 
 # Data Format Param
-## Axis Tap Control Z axis ON
-TAP_AXES_Z_ON  = 0b00000001
-## Axis Tap Control Y axis ON
-TAP_AXES_Y_ON  = 0b00000010
-## Axis Tap Control X axis ON
-TAP_AXES_X_ON  = 0b00000100
-## Axis Interrupt Single Tap
-INT_SINGLE_TAP = 0b01000000
-## Axis Interrupt Double Tap
-INT_DOUBLE_TAP = 0b00100000
+## Axis Tap Control Z axis ON : 0b00000001
+TAP_AXES_Z_ON  = 0x01
+## Axis Tap Control Y axis ON : 0b00000010
+TAP_AXES_Y_ON  = 0x02
+## Axis Tap Control X axis ON : 0b00000100
+TAP_AXES_X_ON  = 0x04
+## Axis Interrupt Single Tap  : 0b01000000
+INT_SINGLE_TAP = 0x40
+## Axis Interrupt Double Tap  : 0b00100000
+INT_DOUBLE_TAP = 0x20
 
 # Power Control Param
-## AUTO SLEEP ON
-AUTO_SLEEP_ON  = 0b00010000
-## AUTO SLEEP OFF
-AUTO_SLEEP_OFF = 0b00000000
-## AUTO MEASURE ON
-MEASURE_ON     = 0b00001000
-## AUTO MEASURE OFF
-MEASURE_OFF    = 0b00000000
-## SLEEP ON
-SLEEP_ON       = 0b00000100
-## SLEEP OFF
-SLEEP_OFF      = 0b00000000
-## WAKEUP 1Hz
-WAKEUP_1HZ     = 0b00000011
-## WAKEUP 2Hz
-WAKEUP_2HZ     = 0b00000010
-## WAKEUP 4Hz
-WAKEUP_4HZ     = 0b00000001
-## WAKEUP 8Hz
-WAKEUP_8HZ     = 0b00000000
+## AUTO SLEEP ON    : 0b00010000
+AUTO_SLEEP_ON  = 0x10
+## AUTO SLEEP OFF   : 0b00000000
+AUTO_SLEEP_OFF = 0x00
+## AUTO MEASURE ON  : 0b00001000
+MEASURE_ON     = 0x08
+## AUTO MEASURE OFF : 0b00000000
+MEASURE_OFF    = 0x00
+## SLEEP ON         : 0b00000100
+SLEEP_ON       = 0x04
+## SLEEP OFF        : 0b00000000
+SLEEP_OFF      = 0x00
+## WAKEUP 1Hz       : 0b00000011
+WAKEUP_1HZ     = 0x03
+## WAKEUP 2Hz       : 0b00000010
+WAKEUP_2HZ     = 0x02
+## WAKEUP 4Hz       : 0b00000001
+WAKEUP_4HZ     = 0x01
+## WAKEUP 8Hz       : 0b00000000
+WAKEUP_8HZ     = 0x00
 
 ## SMBus
 bus = smbus.SMBus(1)
@@ -218,14 +218,3 @@ class ADXL345:
         if(value & (1 << 16 - 1)):
             value -= (1<<16)
         return value
-
-if __name__ == "__main__":
-    axis = ADXL345()
-
-    while True:
-        axis_value = axis.read()
-        print "x = ", (axis_value['x'])
-        print "y = ", (axis_value['y'])
-        print "z = ", (axis_value['z'])
-        print
-        time.sleep(1)
