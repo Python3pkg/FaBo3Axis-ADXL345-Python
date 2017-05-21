@@ -23,12 +23,12 @@ try:
     while True:
         tap = adxl345.readIntStatus()
         if adxl345.isDoubleTap(tap):
-            print "Double Tap"
+            print("Double Tap")
 
         if adxl345.isSingleTap(tap):
-            print "Single Tap"
+            print("Single Tap")
 
-        print "*"
+        print("*")
         time.sleep(0.5)
 
 except KeyboardInterrupt:

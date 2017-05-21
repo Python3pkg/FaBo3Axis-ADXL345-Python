@@ -19,10 +19,10 @@ adxl345 = FaBo3Axis_ADXL345.ADXL345()
 try:
     while True:
         axes = adxl345.read()
-        print "x = " , (axes['x'])
-        print "y = " , (axes['y'])
-        print "z = " , (axes['z'])
-        print
+        print("x = " , (axes['x']))
+        print("y = " , (axes['y']))
+        print("z = " , (axes['z']))
+        print()
 
         time.sleep(0.5)
 except KeyboardInterrupt:
